@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Test js</title>
-</head>
-<body>
-	<h1>Hello World</h1>
-	<h2>Privet</h2>
-	<div class="body">Hello
-		<div class="body__one">One</div>
-		<div class="body__two">two</div>
-		<div class="body__three">three</div>
-	</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+	 <link rel="stylesheet" href="/css/iconsfont.css" />
+    <title>Trello</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="trello__container">
+        <div class="trello__body">
+			<h1 class="trello__h1">To do List</h1>
+          <div class="trello__column">
+            <div class="trello__input-body">
+              <input
+                class="trello__input-cart"
+                placeholder="Добавить задачу"
+                type="text"
+              ></input>
+				  <button class="trello__input-btn-cart _icon-add">Добавить</button>
+            </div>
+				<div class="trello__carts"></div>
+          </div>
+			 <div class="allclear _icon-clearAll"> Очистить список</div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+  </body>
 </html>

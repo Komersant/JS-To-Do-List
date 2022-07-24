@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/* Обнуление стилей*/
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:focus,
+:active {
+  outline: none;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+aside,
+nav,
+footer,
+header,
+section {
+  display: block;
+}
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+}
+body {
+  line-height: 1;
+  font-family: "Roboto", sans-serif;
+  font-size: 28px;
+  /* ff 3.6+ */
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(0, 255, 235, 1) 0%,
+    rgba(7, 58, 187, 1) 100%
+  );
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(0, 255, 235, 1) 0%,
+    rgba(7, 58, 187, 1) 100%
+  );
+  /* opera 11.10+ */
+  background: -o-linear-gradient(
+    90deg,
+    rgba(0, 255, 235, 1) 0%,
+    rgba(7, 58, 187, 1) 100%
+  );
+  /* ie 6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#073ABB', endColorstr='#00FFEB', GradientType=0 );
+  /* ie 10+ */
+  background: -ms-linear-gradient(
+    90deg,
+    rgba(0, 255, 235, 1) 0%,
+    rgba(7, 58, 187, 1) 100%
+  );
+  /* global 94%+ browsers support */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 235, 1) 0%,
+    rgba(7, 58, 187, 1) 100%
+  );
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+input,
+button,
+textarea {
+  font-size: 28px;
+  font-family: "Roboto", sans-serif;
+}
+input::-ms-clear {
+  display: none;
+}
+button {
+  cursor: pointer;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+ul li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+/*---------------------------------------------------------------------------------------*/
+._input-active {
+  visibility: hidden;
+}
+
+.wrapper {
+}
+.trello__container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0px 15px;
+  height: 100vh;
+}
+
+.trello__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.trello__h1 {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 70px;
+  margin: 0px 0px 15px 0px;
+}
+
+.trello__column {
+  display: inline-block;
+  width: 100%;
+}
+
+.trello__input-body {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  margin: 0px 0px 30px 0px;
+}
+
+.trello__input-cart {
+  position: relative;
+  padding: 10px 15px;
+  margin: 10px 0px;
+  border-radius: 3px;
+  opacity: 0.7;
+}
+
+.trello__input-cart:focus {
+  opacity: 1;
+  transition: all 0.3s ease 0s;
+}
+
+.trello__input-btn-cart {
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(30, 87, 153);
+}
+
+.trello__input-btn-cart:before {
+  vertical-align: center;
+  font-size: 23px;
+  margin: 0px 5px 0px 0px;
+}
+
+.trello__input-btn-cart:hover {
+  box-shadow: 0 5px 0px #3c354a;
+  transition: all 0.5s 0s;
+  color: #fff;
+}
+
+.trello__cart {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+  border-radius: 8px;
+  width: 100%;
+  padding: 0px 15px;
+  background: rgb(41, 154, 11);
+}
+
+.trello__cart:hover {
+  transform: scale(1.02, 1.02);
+  background: rgb(64, 150, 238);
+  transition: all 0.3s ease 0s;
+}
+
+.trello__cart-text {
+  padding: 15px;
+}
+
+.trello__cart-icon:hover {
+  cursor: pointer;
+  color: #ffff;
+  transition: all 0.3s ease 0s;
+  transform: rotate(15deg);
+  padding: 3px;
+}
+
+.allclear {
+  cursor: pointer;
+  margin: 15px;
+  background: rgb(183, 222, 237);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.allclear:hover:before {
+  color: red;
+  transition: all 0.5s 0s;
+}
+
+.allclear:hover {
+  transform: scale(1.01, 1.01);
+  transition: all 0.3s ease 0s;
+}
