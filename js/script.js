@@ -1,38 +1,26 @@
 let carts = [];
 
-const inputCart = document.querySelector(".trello__input-cart"); //поле задач инпут
-const btnCart = document.querySelector(".trello__input-btn-cart"); //кнопка добавить задачу
-const TrelloCart = document.querySelector(".trello__carts"); // сюда добавляються задачи
-const btnAll = document.querySelector(".allclear"); //очистить все задачи
+const inputCart = document.getElementById('input-cart'); //поле задач инпут
+const btnCart = document.getElementById('add-cart'); //кнопка добавить задачу
+const blockNewCart = document.getElementById('block-new-task'); // сюда добавляються задачи
+const btnAll = document.getElementById('all-clear-task'); //очистить все задачи
 
 //забираем с хранилища Local Storage значения и парсим их
 const getItemLocal = () => {
-  if (localStorage.getItem("todoCart") !== null) {
-    carts = JSON.parse(localStorage.getItem("todoCart"));
+  if (localStorage.getItem('todoCart') !== null) {
+    return JSON.parse(localStorage.getItem('todoCart'));
   }
+  return [];
 };
 
-//Отправляем в хранилище Local Storage строку задач из массива carts
+//Отправляем в хранилище Local Storage строку задач из массива carts c status: false
 const setItemLocal = () => {
-  return localStorage.setItem("todoCart", JSON.stringify(carts));
-};
-
-//Обновляем задачи в хранилище Local Storage. , фильтруем, оставляем с статусом false и отправляем назад строку задач
-const updateLocal = () => {
-  //Забираем задачи с хранилище Local Storage
-  carts = JSON.parse(localStorage.getItem("todoCart"));
-  //фильтруем задачи и оставляем со статусом false
   const arr = carts.filter((el) => {
-    if (el.status) {
-      return;
-    } else {
-      return el;
-    }
+    return !el.status;
   });
-  //переменная obj хранит задачи с статусом false и переводит в строку фильтрованный массив
   const obj = JSON.stringify(arr);
   //отправляем в хранилище Local Storage строку obj
-  localStorage.setItem("todoCart", obj);
+  localStorage.setItem('todoCart', obj);
   return obj;
 };
 
@@ -48,21 +36,22 @@ const addCart = (nameCart) => {
   carts.push(cart);
   //отправляем хранилище Local Storage новую задачу
   const obj = JSON.stringify(carts);
-  localStorage.setItem("todoCart", obj);
+  localStorage.setItem('todoCart', obj);
 };
 
-// Функция меняет статус на true в задаче если id отличаеться
+// Функция меняет статус на true в задаче если id совпадает
 const clearCart = (id) => {
-  carts.forEach((cart) => {
+  const newArr = carts.map((cart) => {
     if (cart.id === id) {
       cart.status = true;
     }
   });
+  return newArr;
 };
 
-//Фунция render добавляет задачу в html, если её статус в массиве carts = false
+//Фунция render добавляет задачу в html, если её статус в массиве carts status:false
 const render = () => {
-  let html = "";
+  let html = '';
   carts.forEach((cart) => {
     if (cart.status) {
       return;
@@ -75,53 +64,60 @@ const render = () => {
 		</div>
 		`;
   });
-  TrelloCart.innerHTML = html;
+  blockNewCart.innerHTML = html;
 };
-getItemLocal(); //отправляем массив в хранилище Local Storage
+carts = getItemLocal();
 render();
 
 //При нажатии на кнопку добавить добавляем новую задачу и обнуляем строку
-btnCart.addEventListener("click", function (event) {
+btnCart.addEventListener('click', function (event) {
+  event.preventDefault();
   const value = inputCart.value;
-  if (value == "") {
-    alert("Нужно добавить задачу");
-  } else if (value !== "") {
+  if (value == '') {
+    alert('Нужно добавить задачу');
+  } else if (value !== '') {
     addCart(value);
   }
   render();
-  inputCart.value = "";
+  inputCart.value = '';
 });
 
 //Добавляем задачу при нажатии кнопкой Enter
-inputCart.addEventListener("keyup", function (event) {
+inputCart.addEventListener('keyup', (event) => {
+  event.preventDefault();
   const value = inputCart.value;
-  if (event.key == "Enter" && value !== "") {
+  if (event.key !== 'Enter' && value == '') {
+    alert('Нужно добавить задачу');
+  } else if (event.key == 'Enter' && value !== '') {
     addCart(value);
-    inputCart.value = "";
+    inputCart.value = '';
   }
   render();
 });
 
 //Удаляем задачу
-TrelloCart.addEventListener("click", function (event) {
+blockNewCart.addEventListener('click', (event) => {
+  event.preventDefault();
   const id = event.target.dataset.id;
-  if (event.target.tagName !== "DIV") {
+  if (event.target.className !== 'trello__cart-icon _icon-delete') {
     return;
   }
   clearCart(id); //сравниваем id , если id иконки и id задачи совпадают, меняем статус на true
+  setItemLocal(); //отправляем задачи co status:false в хранилище Local Storage
+  carts = getItemLocal(); // забираем задачи
   render(); //обновляем список задач
-  setItemLocal(); //отправляем задачи в хранилище Local Storage
-  updateLocal(); // забираем задачи с хранилище Local Storage, фильтруем и отправляем назад задачи со статусом false
 });
 
 //Очистить весь список задач
-btnAll.addEventListener("click", function () {
-  carts.forEach((cart) => {
+btnAll.addEventListener('click', (event) => {
+  event.preventDefault();
+  const newArray = carts.map((cart) => {
     if (cart.status !== true) {
       cart.status = true;
     }
   });
+  setItemLocal(); //отправляем задачи co status:false в хранилище Local Storage
+  carts = getItemLocal(); // забираем задачи
   render(); //обновляем список задач
-  setItemLocal(); //отправляем задачи в хранилище Local Storage
-  updateLocal(); // забираем задачи с хранилище Local Storage, фильтруем и отправляем назад задачи со статусом false
+  return newArray;
 });
